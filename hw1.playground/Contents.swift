@@ -16,37 +16,41 @@ class Words {
     init (wordA: String?, wordB: String?) {
         self.wordA = wordA
         self.wordB = wordB
-    }
+    } 
+    
 
 //: ### Are the values passed in to the **init** function and those set to the instance
 //: ### variables the same type? If not, why?
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: No, because the values passed into the **init** function are String optionals while the values set to the instance variables are Strings as they are optionals that have been forcefully unpacked.
 
 
 //: ## Q2: Variable Types and Function Types
-    func arePalindromes(words: [String]) -> Bool {
+    class func arePalindromes(words: [String]) -> Bool {
         let reversedWords = words.map() {String($0.characters.reverse())}
         var numElements = words.count
         
-        for let i = 0; i < numElements; i++ {
+        for var i = 0; i < numElements; i++ {
             if words[i] != reversedWords[i] {
                 return false
             }
         }
+        
+        return true
     }
+    
 //: ### Why does the compiler dislike the **for loop**? Fix it.
 //: ### What else is wrong with this function? You may have to refer to (but **not**
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: The compiler dislikes the **for** loop because i was defined as a let constant which is immutable and then the loop was trying to incrememt this constant. The function also needs to be a class function in order to be called correctly by the code at the bottom. Lastly, the function needed a return statement outside of the conditional if.
 
 
 //: ## Q3: More Functions and Object Initialization
-    class func isAnagram() -> Bool {
-        var countLetters : [Character : Int] //Line X
+    func isAnagram() -> Bool {
+        var countLetters : [Character : Int] = [Character : Int]() //Line X
         var lenA = self.wordA.characters.count
         var lenB = self.wordB.characters.count
         
@@ -81,7 +85,7 @@ class Words {
             }
         }
         
-        return nil
+        return true
     }
 //: ### What is the problem with declaring **countLetters** as we do in **Line X**,
 //: ### and then using it in **Line Y**? Fix it (by only changing **Line X**).
@@ -89,7 +93,7 @@ class Words {
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: The function does not need to be a class function because a Words object calls it in wordsObj.isAnagram(). Its var countLetters also needed to be initialized as an empty dictionary and a return statement was needed outside of the conditionals.
     
     
 }
